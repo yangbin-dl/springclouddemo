@@ -1,0 +1,9 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:mysql://rm-m5es50j9lfj56x323jo.mysql.rds.aliyuncs.com:3306/alpha?allowMulitQueries=true&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: Tonsan123
+mybatis:
+  type-aliases-package: mallfe.demo.user.pojo
