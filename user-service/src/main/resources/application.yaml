@@ -5,5 +5,15 @@ spring:
     url: jdbc:mysql://rm-m5es50j9lfj56x323jo.mysql.rds.aliyuncs.com:3306/alpha?allowMulitQueries=true&useUnicode=true&characterEncoding=utf8
     username: root
     password: Tonsan123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: user-service
 mybatis:
   type-aliases-package: mallfe.demo.user.pojo
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
