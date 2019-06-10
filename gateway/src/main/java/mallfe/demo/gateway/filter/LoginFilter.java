@@ -4,6 +4,7 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpStatus;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.stereotype.Component;
 
@@ -31,14 +32,18 @@ public class LoginFilter extends ZuulFilter {
     public Object run() throws ZuulException {
         // 获取上下文
         RequestContext ctx = RequestContext.getCurrentContext();
-        // 获取请求参数
+        // 获取request
         HttpServletRequest request = ctx.getRequest();
-        // 判断是否存在
+        // 获取请求参数
         String token = request.getParameter("access-token");
-        //不存在，未登录，则拦截
+
+        // 判断是否存在
         //if(token == null || token.trim().isEmpty())   --不推荐，麻烦
         if(StringUtils.isBlank(token)){
-
+            // 不存在，未登录，则拦截
+            ctx.setSendZuulResponse(false);
+            // 返回403
+            ctx.setResponseStatusCode(HttpStatus.SC_FORBIDDEN);
         }
         return null;
     }
